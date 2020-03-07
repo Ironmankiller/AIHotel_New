@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+
+def depend_android = rootProject.ext.depend_android
+def depend_lib = rootProject.ext.depend_lib
+
+
+android {
+    compileSdkVersion depend_android["compileSdkVersion"]
+    buildToolsVersion depend_android["buildToolsVersion"]
+    defaultConfig {
+        applicationId "com.spy.wb.aihotel_new"
+        minSdkVersion depend_android["minSdkVersion"]
+        targetSdkVersion depend_android["targetSdkVersion"]
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        flavorDimensions "default"
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
+    }
+    buildTypes {
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support:support-v4:28.0.0-alpha1'
+    testImplementation depend_lib["junit"]
+    implementation depend_lib["appcompat-v7"]
+    implementation depend_lib["design"]
+    implementation depend_lib["cardview"]
+    implementation depend_lib["constraint-layout"]
+    implementation depend_lib["slidr"]
+    implementation depend_lib["roundedimageview"]
+    implementation depend_lib["rxjava"]
+    implementation depend_lib["rxandroid"]
+    implementation depend_lib["okhttp"]
+    implementation depend_lib["okhttp-interceptor"]
+    implementation depend_lib["retrofit"]
+    implementation depend_lib["converter-gson"]
+    implementation depend_lib["rxjava2-adapter"]
+    implementation depend_lib["glide"]
+    annotationProcessor depend_lib["glide-compiler"]
+    implementation depend_lib["timber"]
+    implementation depend_lib["butterknife"]
+    implementation depend_lib["chunk"]
+    implementation depend_lib["okgo"]
+    implementation depend_lib["okrx2"]
+    implementation depend_lib["BaseRecycler"]
+}

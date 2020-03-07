@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="@string/menu_work">
+        <menu>
+            <item
+                android:id="@+id/nav_work_face_check"
+                android:icon="@drawable/ic_work_face_check"
+                android:title="@string/menu_work_face_check" />
+            <item
+                android:id="@+id/nav_work_id_check"
+                android:icon="@drawable/ic_work_id_check"
+                android:title="@string/menu_work_id_check" />
+        </menu>
+    </item>
+
+    <item android:title="@string/menu_data">
+        <menu>
+            <item
+                android:id="@+id/nav_data_record"
+                android:icon="@drawable/ic_data_record"
+                android:title="@string/menu_data_record" />
+            <item
+                android:id="@+id/nav_data_library"
+                android:icon="@drawable/ic_data_library"
+                android:title="@string/menu_data_library" />
+            <item
+                android:id="@+id/nav_data_device"
+                android:icon="@drawable/ic_data_device"
+                android:title="@string/menu_data_device" />
+        </menu>
+    </item>
+
+    <item android:title="@string/menu_system" >
+        <menu>
+            <item
+                android:id="@+id/nav_system_setting"
+                android:icon="@drawable/ic_system_setting"
+                android:title="@string/menu_system_setting" />
+            <item
+                android:id="@+id/nav_system_about"
+                android:icon="@drawable/ic_system_about"
+                android:title="@string/menu_system_about" />
+        </menu>
+    </item>
+
+</menu>
+
