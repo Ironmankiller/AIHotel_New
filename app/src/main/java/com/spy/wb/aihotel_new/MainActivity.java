@@ -116,7 +116,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             mFgManager.beginTransaction().replace(R.id.cly_main_content,
                     fragment, null).commit();
             toolbar.setTitle(fragment.getTitle());
-            Toast.makeText(mContext,fragment.getTitle(),Toast.LENGTH_SHORT).show();
         } else {
             fragment = null;
         }

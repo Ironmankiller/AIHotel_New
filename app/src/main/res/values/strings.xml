@@ -7,6 +7,10 @@
     <string name="simple_view_behavior">com.lzy.demo.ui.SimpleViewBehavior</string>
     <string name="translate_up_down_behavior">com.lzy.demo.ui.TranslateUpDownBehavior</string>
 
+    <string name="check_face_connection_info">
+        设备编号：22\n工作环境：电梯间\n连接状态：成功\n
+    </string>
+
     <!-- 抽屉菜单 -->
     <string name="menu_work">工作</string>
     <string name="menu_work_face_check">人脸识别</string>

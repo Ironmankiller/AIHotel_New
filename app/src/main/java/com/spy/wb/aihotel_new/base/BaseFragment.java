@@ -21,6 +21,9 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 
 /**
  * 若把初始化内容放到initData实现,就是采用Lazy方式加载的Fragment
@@ -114,5 +117,17 @@ public abstract class BaseFragment extends Fragment {
     public BaseFragment setTitle(String title) {
         fragmentTitle = title;
         return this;
+    }
+
+    public void displayImage(int resId, ImageView imageView) {
+        Glide.with(getActivity())//
+                .load(resId)//
+                .into(imageView);
+    }
+
+    public void displayImage(String url, ImageView imageView) {
+        Glide.with(getActivity())//
+                .load(url)//
+                .into(imageView);
     }
 }
