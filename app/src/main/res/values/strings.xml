@@ -19,7 +19,7 @@
     <string name="menu_data">数据</string>
     <string name="menu_data_record">结果记录</string>
     <string name="menu_data_library">人脸库</string>
-    <string name="menu_data_device">设备信息</string>
+    <string name="menu_data_statistics">统计信息</string>
 
     <string name="menu_system">系统</string>
     <string name="menu_system_setting">设置</string>
@@ -27,6 +27,8 @@
     <string name="menu_aihotel_version">AIHotel Version: %1$s</string>
     <string name="drawer_open">抽屉打开</string>
     <string name="drawer_close">抽屉关闭</string>
+
+    <string name="double_click_exit">再按一次退出程序</string>
 
 
     <!--SDK相关-->

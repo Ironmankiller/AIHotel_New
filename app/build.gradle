@@ -33,7 +33,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-    implementation 'com.android.support:support-v4:28.0.0-alpha1'
+
     testImplementation depend_lib["junit"]
     implementation depend_lib["appcompat-v7"]
     implementation depend_lib["design"]
@@ -56,4 +56,7 @@ dependencies {
     implementation depend_lib["okgo"]
     implementation depend_lib["okrx2"]
     implementation depend_lib["BaseRecycler"]
+    implementation depend_lib["floatingsearchview"]
+    implementation depend_lib["fresco"]
+
 }

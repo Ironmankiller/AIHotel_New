@@ -2,6 +2,7 @@ package com.spy.wb.aihotel_new;
 
 import android.app.Application;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -34,10 +35,16 @@ public class HotelAPP extends Application {
 
         initOkGo();
         initTimber();
+        initFresco();
     }
 
     public static HotelAPP getContext() {
         return context;
+    }
+
+
+    public void initFresco(){
+        Fresco.initialize(this);
     }
 
     private void initTimber() {

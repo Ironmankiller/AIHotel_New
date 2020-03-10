@@ -14,6 +14,8 @@ def chunkVersion = "1.0.4"
 def okgoVersion = "3.0.4"
 def okrx2Version = "2.0.2"
 def baseRecyclerVersion = "v2.0.7"
+def floatingsearchviewVersion = "2.1.1"
+def frescoVersion = "0.12.0"
 
 project.ext {
     depend_android = [
@@ -53,6 +55,9 @@ project.ext {
             "okgo"               : "com.lzy.net:okgo:${okgoVersion}",
             "okrx2"              : "com.lzy.net:okrx2:${okrx2Version}",
             "BaseRecycler"      :  "com.github.CymChad:BaseRecyclerViewAdapterHelper:${baseRecyclerVersion}",
+            "floatingsearchview":  "com.github.arimorty:floatingsearchview:${floatingsearchviewVersion}",
+
+            "fresco"             : "com.facebook.fresco:fresco:${frescoVersion}"
 
 //            implementation 'com.lzy.widget:ninegridview:0.2.1'
 //            implementation 'com.lzy.widget:imagepicker:0.3.2'

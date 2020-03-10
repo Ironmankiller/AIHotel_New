@@ -15,6 +15,7 @@
  */
 package com.spy.wb.aihotel_new.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -51,10 +52,12 @@ public abstract class BaseFragment extends Fragment {
     private boolean isPrepared;                 //标志位，View已经初始化完成。
     private boolean isFirstLoad = true;         //是否第一次加载
     protected LayoutInflater inflater;
+    protected Context mContext;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.inflater = inflater;
+        mContext = getActivity();
         isFirstLoad = true;
         View view = initView(inflater, container, savedInstanceState);
         isPrepared = true;
@@ -120,13 +123,13 @@ public abstract class BaseFragment extends Fragment {
     }
 
     public void displayImage(int resId, ImageView imageView) {
-        Glide.with(getActivity())//
+        Glide.with(mContext)//
                 .load(resId)//
                 .into(imageView);
     }
 
     public void displayImage(String url, ImageView imageView) {
-        Glide.with(getActivity())//
+        Glide.with(mContext)//
                 .load(url)//
                 .into(imageView);
     }

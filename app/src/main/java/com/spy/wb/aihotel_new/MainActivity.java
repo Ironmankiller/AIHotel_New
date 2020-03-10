@@ -1,15 +1,11 @@
 package com.spy.wb.aihotel_new;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -19,15 +15,13 @@ import android.widget.Toast;
 import com.spy.wb.aihotel_new.base.BaseActivity;
 import com.spy.wb.aihotel_new.base.BaseFragment;
 import com.spy.wb.aihotel_new.ui.fragment.AboutFragment;
-import com.spy.wb.aihotel_new.ui.fragment.DeviceInfoFragment;
+import com.spy.wb.aihotel_new.ui.fragment.ResultStatisticsFragment;
 import com.spy.wb.aihotel_new.ui.fragment.FaceCheckFragment;
 import com.spy.wb.aihotel_new.ui.fragment.FaceLibraryFragment;
 import com.spy.wb.aihotel_new.ui.fragment.IDCheckFragment;
 import com.spy.wb.aihotel_new.ui.fragment.ResultRecordFragment;
 import com.spy.wb.aihotel_new.ui.fragment.SettingFragment;
 import com.spy.wb.aihotel_new.utils.PackageUtils;
-
-import java.util.List;
 
 import butterknife.Bind;
 
@@ -39,10 +33,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     DrawerLayout drawer_layout;
     @Bind(R.id.nav_view)
     NavigationView nav_view;
-    @Bind(R.id.cly_main_content)
-    ConstraintLayout cly_main_content;
     private FragmentManager mFgManager;
     private TextView tv_nav_title;
+    private long exitTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,8 +88,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case R.id.nav_data_library:
                 changeFragment(FaceLibraryFragment.newInstance(mContext));
                 break;
-            case R.id.nav_data_device:
-                changeFragment(DeviceInfoFragment.newInstance(mContext));
+            case R.id.nav_data_statistics:
+                changeFragment(ResultStatisticsFragment.newInstance(mContext));
                 break;
             case R.id.nav_system_setting:
                 changeFragment(SettingFragment.newInstance(mContext));
@@ -126,7 +119,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            long currentTime = System.currentTimeMillis();
+            if ((currentTime - exitTime) < 2000) {
+                super.onBackPressed();
+            } else {
+                Toast.makeText(this, R.string.double_click_exit, Toast.LENGTH_SHORT).show();
+                exitTime = currentTime;
+            }
         }
     }
 }

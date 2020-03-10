@@ -14,8 +14,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_system_about" />
-                            <entry key="sourceFile" value="F:\下载\关于.svg" />
+                            <entry key="outputName" value="ic_result_record_statistics" />
+                            <entry key="sourceFile" value="F:\下载\record.svg" />
                           </map>
                         </option>
                       </PersistentState>
