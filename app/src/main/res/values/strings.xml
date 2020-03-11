@@ -5,7 +5,7 @@
     <string name="app_tip">爱住智慧酒店解决方案</string>
 
     <string name="simple_view_behavior">com.lzy.demo.ui.SimpleViewBehavior</string>
-    <string name="translate_up_down_behavior">com.lzy.demo.ui.TranslateUpDownBehavior</string>
+    <string name="translate_up_down_behavior">com.spy.wb.aihotel_new.widget.behavior.TranslateUpDownBehavior</string>
 
     <string name="check_face_connection_info">
         设备编号：22\n工作环境：电梯间\n连接状态：成功\n

@@ -15,19 +15,44 @@
         android:fitsSystemWindows="true"
         tools:context=".MainActivity">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/search_results_list"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/srl_refresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:paddingTop="60dp"
-            android:clipToPadding="false"/>
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rec_record"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:clipToPadding="false"/>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/ic_fab_love"
+            app:borderWidth="0dp"
+            app:backgroundTint="@color/colorPrimary"
+            app:rippleColor="#03588f"
+            app:pressedTranslationZ="10dp"
+            app:elevation="5dp"
+            app:layout_behavior="@string/translate_up_down_behavior"
+            app:layout_scrollFlags="scroll|enterAlways|snap"/>
+
 
         <com.arlib.floatingsearchview.FloatingSearchView
             android:id="@+id/floating_search_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="gone"
             app:floatingSearch_dismissOnOutsideTouch="true"
             app:floatingSearch_leftActionMode="showSearch"
             app:floatingSearch_searchBarMarginLeft="@dimen/search_view_inset"

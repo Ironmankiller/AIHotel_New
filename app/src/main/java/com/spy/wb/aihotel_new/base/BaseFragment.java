@@ -127,10 +127,4 @@ public abstract class BaseFragment extends Fragment {
                 .load(resId)//
                 .into(imageView);
     }
-
-    public void displayImage(String url, ImageView imageView) {
-        Glide.with(mContext)//
-                .load(url)//
-                .into(imageView);
-    }
 }
