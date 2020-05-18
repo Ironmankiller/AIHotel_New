@@ -127,4 +127,6 @@ public abstract class BaseFragment extends Fragment {
                 .load(resId)//
                 .into(imageView);
     }
+
+    public abstract boolean onActivityBackPress();
 }

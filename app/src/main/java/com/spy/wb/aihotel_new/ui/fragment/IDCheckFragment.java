@@ -56,4 +56,9 @@ public class IDCheckFragment extends BaseFragment {
     public void onViewClicked() {
         ToastUtils.shortToast("开始人证核验");
     }
+
+    @Override
+    public boolean onActivityBackPress() {
+        return false;
+    }
 }

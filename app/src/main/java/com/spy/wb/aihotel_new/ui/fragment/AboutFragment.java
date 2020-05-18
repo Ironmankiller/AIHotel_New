@@ -42,4 +42,9 @@ public class AboutFragment extends BaseFragment {
     protected void initData() {
 
     }
+
+    @Override
+    public boolean onActivityBackPress() {
+        return false;
+    }
 }

@@ -22,6 +22,9 @@ import com.spy.wb.aihotel_new.ui.fragment.IDCheckFragment;
 import com.spy.wb.aihotel_new.ui.fragment.ResultRecordFragment;
 import com.spy.wb.aihotel_new.ui.fragment.SettingFragment;
 import com.spy.wb.aihotel_new.utils.PackageUtils;
+import com.spy.wb.aihotel_new.utils.ToastUtils;
+
+import java.util.List;
 
 import butterknife.Bind;
 
@@ -35,7 +38,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     NavigationView nav_view;
     private FragmentManager mFgManager;
     private TextView tv_nav_title;
-    private long exitTime = 0;
+    protected long exitTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,13 +122,18 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START);
         } else {
-            long currentTime = System.currentTimeMillis();
-            if ((currentTime - exitTime) < 2000) {
-                super.onBackPressed();
-            } else {
-                Toast.makeText(this, R.string.double_click_exit, Toast.LENGTH_SHORT).show();
-                exitTime = currentTime;
+            List fragments = getSupportFragmentManager().getFragments();
+            BaseFragment currentFragment = (BaseFragment) fragments.get(fragments.size() - 1);
+            if(!currentFragment.onActivityBackPress()) {
+                long currentTime = System.currentTimeMillis();
+                if ((currentTime - exitTime) < 2000) {
+                    super.onBackPressed();
+                } else {
+                    ToastUtils.shortToast(getString(R.string.double_click_exit));
+                    exitTime = currentTime;
+                }
             }
+
         }
     }
 }

@@ -1,36 +1,39 @@
 package com.spy.wb.aihotel_new.ui.fragment;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
+import com.arlib.floatingsearchview.suggestions.SearchSuggestionsAdapter;
+import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
+import com.arlib.floatingsearchview.util.Util;
 import com.spy.wb.aihotel_new.R;
 import com.spy.wb.aihotel_new.base.BaseFragment;
+import com.spy.wb.aihotel_new.data.RecordDataHelper;
 import com.spy.wb.aihotel_new.model.RecordModel;
 import com.spy.wb.aihotel_new.ui.adapter.RecordAdapter;
 import com.spy.wb.aihotel_new.utils.ToastUtils;
-import com.spy.wb.aihotel_new.widget.helper.BottomNavigationViewHelper;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,27 +41,26 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 
 public class ResultRecordFragment extends BaseFragment {
 
-    private List<RecordModel> testrefresh;
+    public static final long FIND_SUGGESTION_SIMULATED_DELAY = 250;
+    private static final String TAG = "ResultRecordFragment";
 
     @Bind(R.id.srl_refresh) SwipeRefreshLayout srl_refresh;
     @Bind(R.id.fab_search) FloatingActionButton fab_search;
     @Bind(R.id.floating_search_view) FloatingSearchView fsearch_view;
     @Bind(R.id.rec_record) RecyclerView rec_record;
 
-    private static final String TAG = "ResultRecordFragment";
+
     private RecordAdapter mAdapter;
     private static final int PRELOAD_SIZE = 6;
     private int mCurPage = 1;
     private ArrayList<RecordModel> mData;
     private final Interpolator INTERPOLATOR = new FastOutSlowInInterpolator();
+    private List<RecordModel> testrefresh;
+    private String mLastQuery = "";
 
     public static ResultRecordFragment newInstance(Context context) {
         ResultRecordFragment fragment = new ResultRecordFragment();
@@ -97,6 +99,7 @@ public class ResultRecordFragment extends BaseFragment {
         });
         fab_search.setOnClickListener(v -> {
             fsearch_view.setVisibility(View.VISIBLE);
+            fsearch_view.setSearchBarTitle(mLastQuery);
         });
         return view;
     }
@@ -112,6 +115,7 @@ public class ResultRecordFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //mSubscriptions = new CompositeDisposable();
+        setupFloatingSearch();
         mData = new ArrayList<>();
         testrefresh = new ArrayList<>();
         mAdapter = new RecordAdapter(mData);
@@ -218,4 +222,61 @@ public class ResultRecordFragment extends BaseFragment {
         }
     }
 
+
+    private void setupFloatingSearch() {
+
+        fsearch_view.setOnSearchListener(new FloatingSearchView.OnSearchListener() {
+            @Override
+            public void onSuggestionClicked(SearchSuggestion searchSuggestion) {
+
+            }
+
+            @Override
+            public void onSearchAction(String query) {
+                mLastQuery = query;
+
+                RecordDataHelper.findRecords(getActivity(), query,
+                        new RecordDataHelper.OnFindRecordsListener() {
+
+                            @Override
+                            public void onResults(List<RecordModel> results) {
+                                mAdapter.setNewData(results);
+                            }
+                        });
+                Log.d(TAG, "onSearchAction()");
+            }
+        });
+
+        fsearch_view.setOnFocusChangeListener(new FloatingSearchView.OnFocusChangeListener() {
+            @Override
+            public void onFocus() {
+
+                //show suggestions when search bar gains focus (typically history suggestions)
+
+                Log.d(TAG, "onFocus()");
+            }
+
+            @Override
+            public void onFocusCleared() {
+
+                //set the title of the bar so that when focus is returned a new query begins
+                fsearch_view.setVisibility(View.INVISIBLE);
+                //you can also set setSearchText(...) to make keep the query there when not focused and when focus returns
+                //mSearchView.setSearchText(searchSuggestion.getBody());
+
+                Log.d(TAG, "onFocusCleared()");
+            }
+        });
+
+    }
+
+    @Override
+    public boolean onActivityBackPress() {
+
+        if(fsearch_view.isSearchBarFocused()) {
+            fsearch_view.setVisibility(View.INVISIBLE);
+            return true;
+        }
+        return false;
+    }
 }

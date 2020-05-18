@@ -58,4 +58,9 @@ public class FaceCheckFragment extends BaseFragment {
     }
 
 
+    @Override
+    public boolean onActivityBackPress() {
+        return false;
+    }
+
 }

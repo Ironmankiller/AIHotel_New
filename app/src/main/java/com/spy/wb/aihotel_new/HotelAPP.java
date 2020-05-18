@@ -25,22 +25,22 @@ import javax.net.ssl.X509TrustManager;
 import okhttp3.OkHttpClient;
 import timber.log.Timber;
 
-public class HotelAPP extends Application {
-    private static HotelAPP context;
+    public class HotelAPP extends Application {
+        private static HotelAPP context;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        context = this;
+        @Override
+        public void onCreate() {
+            super.onCreate();
+            context = this;
 
-        initOkGo();
-        initTimber();
-        initFresco();
-    }
+            initOkGo();
+            initTimber();
+            initFresco();
+        }
 
-    public static HotelAPP getContext() {
-        return context;
-    }
+        public static HotelAPP getContext() {
+            return context;
+        }
 
 
     public void initFresco(){

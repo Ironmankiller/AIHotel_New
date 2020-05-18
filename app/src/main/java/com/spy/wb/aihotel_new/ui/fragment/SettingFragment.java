@@ -27,4 +27,9 @@ public class SettingFragment extends BaseFragment {
     protected void initData() {
 
     }
+
+    @Override
+    public boolean onActivityBackPress() {
+        return false;
+    }
 }
